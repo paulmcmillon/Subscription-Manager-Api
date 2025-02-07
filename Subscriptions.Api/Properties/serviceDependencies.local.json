@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/softeknology-key-vault",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri",
+      "dynamicId": null
+    },
+    "secrets2": {
+      "type": "secrets.user"
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.ServiceLinker/locations/centralus/connectors/StorageConnection_CDD8BE531F, /subscriptions/019c762f-4413-447b-b2ce-aeb637960ecd/resourceGroups/softeknology-centralus-rg/providers/Microsoft.ServiceLinker/locations/centralus/connectors/StorageConnection_117AE4F86D",
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/softeknologystorageacct",
+      "type": "storage.azure",
+      "connectionId": "StorageConnection"
+    }
+  }
+}
