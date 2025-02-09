@@ -9,7 +9,7 @@ namespace Subscriptions.Data.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; init; }
         [Required]
-        public required int SusbcriptionTypeId { get; set; }        
+        public required int SubscriptionTypeId { get; set; }        
         [Required, MinLength(3), MaxLength(50)]
         public required string Name { get; set; }
         public string? Description { get; set; } = null;
