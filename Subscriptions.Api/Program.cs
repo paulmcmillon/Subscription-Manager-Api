@@ -1,6 +1,9 @@
 using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
+using Subscriptions.Api.Interfaces;
+using Subscriptions.Api.Public.EndPoints;
+using Subscriptions.Api.Services;
 using Subscriptions.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,10 +22,13 @@ builder.Services.AddCors(policy =>
         .WithOrigins("https://localhost:7210/"));
 });
 
+builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
+
 // Get the Azure Key Vault endpoint from the configuration
 var keyVaultEndpointUri = builder.Configuration["AzureKeyVault:Vault"];
 if (string.IsNullOrEmpty(keyVaultEndpointUri))
 {
+    //TODO: Log this error
     throw new ArgumentNullException(nameof(keyVaultEndpointUri), "Azure Key Vault endpoint is not configured.");
 }
 var keyVaultEndpoint = new Uri(keyVaultEndpointUri);
@@ -51,7 +57,7 @@ builder.Services.AddDbContext<SubscriptionsContext>(options =>
 
 // TODO: Create passwordless connection to Azure SQL
 
-// NOTE: This will pull from the UserSecrets file...might want to use this as a backup
+// NOTE: This will pull from the appsettings.json file...might want to use this as a backup
 // in case call to KeyVault fails or for local development.
 string localConnectionString = builder.Configuration["LocalServices:localConnectionString"]!;
 
@@ -72,4 +78,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+SusbcriptionTypeEndPoints.MapEndPoints(app, _ => { });
+
 app.Run();

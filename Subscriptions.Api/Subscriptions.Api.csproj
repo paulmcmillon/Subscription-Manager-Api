@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Subscriptions.Data\Subscriptions.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EndPoints\" />
+  </ItemGroup>
+
 </Project>

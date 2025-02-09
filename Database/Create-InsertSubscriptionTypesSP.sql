@@ -213,5 +213,16 @@ INSERT INTO [SubscriptionTypes](
 		,'Reporting'
 		,'Description 6'
 	);
+
+	SELECT [Id]
+		  ,[Name]
+		  ,[Description]
+		  ,[SubscriptionTypeId]
+	  FROM [dbo].[Features]
+	  GROUP BY 
+		 [Id]
+		,[Name]
+		,[Description]
+		,[SubscriptionTypeId]
 END
 GO
