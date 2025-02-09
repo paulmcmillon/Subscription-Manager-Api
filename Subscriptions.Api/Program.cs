@@ -1,6 +1,7 @@
 using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
+using Subscriptions.Api.EndPoints;
 using Subscriptions.Api.Interfaces;
 using Subscriptions.Api.Public.EndPoints;
 using Subscriptions.Api.Services;
@@ -23,6 +24,8 @@ builder.Services.AddCors(policy =>
 });
 
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
 
 // Get the Azure Key Vault endpoint from the configuration
 var keyVaultEndpointUri = builder.Configuration["AzureKeyVault:Vault"];
@@ -79,5 +82,5 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 SusbcriptionTypeEndPoints.MapEndPoints(app, _ => { });
-
+SubscriptionEndPoints.MapEndPoints(app, _ => { });
 app.Run();
