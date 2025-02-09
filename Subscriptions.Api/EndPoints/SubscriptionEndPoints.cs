@@ -23,10 +23,12 @@ namespace Subscriptions.Api.EndPoints
                     logger.LogError(ex, ex.StackTrace);
                     return Results.Problem(ex.Message);
                 }
-                //var subscription = await subscriptionService.CreateSusbcription(request);                                
-                //return Results.Created($"/Subscription/{subscription.Id}", subscription);
-            });
-
+            })
+            .Produces<List<SubscriptionType>>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
+            .WithSummary("Create a new subscription")
+            .WithDescription("Creates a subscription record and associated payment record.");
         }
     }
 }
