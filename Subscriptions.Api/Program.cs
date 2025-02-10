@@ -83,4 +83,5 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 SusbcriptionTypeEndPoints.MapEndPoints(app, _ => { });
 SubscriptionEndPoints.MapEndPoints(app, _ => { });
+ApiTestEndPoints.MapEndPoints(app, _ => { });
 app.Run();
