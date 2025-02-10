@@ -20,7 +20,7 @@ builder.Services.AddCors(policy =>
         .AllowAnyHeader()
         .AllowAnyMethod()
         .SetIsOriginAllowed(origin => true)
-        .WithOrigins("https://localhost:7210/"));
+        .WithOrigins("https://localhost:7059/"));
 });
 
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
