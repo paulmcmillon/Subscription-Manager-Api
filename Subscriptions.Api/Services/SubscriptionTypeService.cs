@@ -7,6 +7,13 @@ namespace Subscriptions.Api.Services
 {
     internal sealed class SubscriptionTypeService(SubscriptionsContext dbContext) : ISubscriptionTypeService
     {
+        ///--------------------------------------------------------------------------
+        /// <summary>
+        /// Return a list of the subscription types and their related features from
+        /// the database.
+        /// </summary>
+        /// <returns>Enumerable Collection</returns>
+        ///--------------------------------------------------------------------------
         public async Task<IEnumerable<SubscriptionType>> GetSubscriptionTypes()
         {
             //Creating Scenario to throw Unhandled Exception

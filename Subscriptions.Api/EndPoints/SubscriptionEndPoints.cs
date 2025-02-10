@@ -11,7 +11,7 @@ namespace Subscriptions.Api.EndPoints
             var subscriptionGroup = app.MapGroup("Subscription");
 
             subscriptionGroup.MapPost("/", async ([FromBody]NewSubscriptionRequest request, 
-                ISubscriptionService subscriptionService, ILogger logger, CancellationToken cancellation) =>
+                ISubscriptionService subscriptionService) =>
             {
                 try
                 {
@@ -20,7 +20,7 @@ namespace Subscriptions.Api.EndPoints
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, ex.StackTrace);
+                    //logger.LogError(ex, ex.StackTrace);
                     return Results.Problem(ex.Message);
                 }
             })
