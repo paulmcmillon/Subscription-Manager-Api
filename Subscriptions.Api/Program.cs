@@ -9,6 +9,12 @@ using Subscriptions.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add logging providers
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
@@ -80,8 +86,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+ILogger _logger = app.Services.GetRequiredService<ILogger<Program>>();
+_logger.LogDebug("================================================================================");
+
 app.UseHttpsRedirection();
 SusbcriptionTypeEndPoints.MapEndPoints(app, _ => { });
 SubscriptionEndPoints.MapEndPoints(app, _ => { });
 ApiTestEndPoints.MapEndPoints(app, _ => { });
 app.Run();
+
+_logger.LogDebug("================================================================================");
+_logger.LogInformation("Application started");

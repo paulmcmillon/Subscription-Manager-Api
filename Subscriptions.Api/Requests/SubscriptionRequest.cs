@@ -1,9 +1,10 @@
 ﻿record NewSubscriptionRequest
 (
-    int subscriptionType,
-    string billingInterval,
-    string adminEmail,
-    string adminName,
-    decimal paymentAmount,
-    string paymentMethod
+    int TypeId,
+    string BillingInterval,
+    string AdminEmail,
+    string AdminName,
+    decimal PaymentAmount,
+    string PaymentMethod,
+    string PaymentTransactionId
 );

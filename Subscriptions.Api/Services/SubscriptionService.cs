@@ -19,10 +19,10 @@ namespace Subscriptions.Api.Services
         {
             var subscription = new Subscription
             {
-                SubscriptionTypeId = request.subscriptionType,
-                BillingInterval = request.billingInterval,
-                Email = request.adminEmail,
-                AdministratorName = request.adminName,
+                SubscriptionTypeId = request.TypeId,
+                BillingInterval = request.BillingInterval,
+                Email = request.AdminEmail,
+                AdministratorName = request.AdminName,
                 IsLocked = false,
                 LockReason = "Unlocked",
                 IsSoftDeleted = false
@@ -30,8 +30,9 @@ namespace Subscriptions.Api.Services
             var payment = new Payment
             {
                 SubscriptionId = subscription.Id,
-                Amount = request.paymentAmount,
-                PaymentMethod = request.paymentMethod
+                Amount = request.PaymentAmount,
+                PaymentMethod = request.PaymentMethod,
+                PaymentTransactionId = request.PaymentTransactionId
             };
             await dbContext.Subscriptions.AddAsync(subscription);
             await dbContext.Payments.AddAsync(payment);

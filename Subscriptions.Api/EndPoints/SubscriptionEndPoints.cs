@@ -15,6 +15,10 @@ namespace Subscriptions.Api.EndPoints
             {
                 try
                 {
+                    Console.WriteLine("---------------------------------------------");
+                    Console.WriteLine($"HTTP REQUEST Object - {request}");
+                    Console.WriteLine("---------------------------------------------");
+
                     var subscription = await subscriptionService.CreateSusbcription(request);
                     return Results.Created($"/Subscription/{subscription.Id}", subscription);
                 }
