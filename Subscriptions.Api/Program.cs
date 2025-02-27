@@ -1,19 +1,21 @@
-using Azure.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Azure;
+using Serilog;
 using Subscriptions.Api.EndPoints;
 using Subscriptions.Api.Interfaces;
 using Subscriptions.Api.Public.EndPoints;
 using Subscriptions.Api.Services;
 using Subscriptions.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add logging providers
-builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
-builder.Logging.AddDebug();
-builder.Logging.SetMinimumLevel(LogLevel.Information);
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -86,7 +88,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-ILogger _logger = app.Services.GetRequiredService<ILogger<Program>>();
+Microsoft.Extensions.Logging.ILogger _logger = app.Services.GetRequiredService<ILogger<Program>>();
 _logger.LogDebug("================================================================================");
 
 app.UseHttpsRedirection();
